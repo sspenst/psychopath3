@@ -7,13 +7,17 @@
     "eslint:recommended",
     "next/core-web-vitals",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "async",
+    "async/node",
+    "async/typescript"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
+    "project": ["tsconfig.json"] ,
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
@@ -21,7 +25,8 @@
     "react",
     "@typescript-eslint",
     "simple-import-sort",
-    "import"
+    "import",
+    "eslint-plugin-node"
   ],
   "rules": {
     "@typescript-eslint/type-annotation-spacing": "warn",
