@@ -28,6 +28,7 @@ describe('Testing updating collection data', () => {
       const ts = TimerUtil.getTs();
 
       levels[i] = new ObjectId();
+      // eslint-disable-next-line no-await-in-loop
       const response = await LevelModel.create({
         _id: levels[i],
         authorNote: 'test level 1 author note',

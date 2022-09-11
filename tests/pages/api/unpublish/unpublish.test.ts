@@ -159,7 +159,9 @@ describe('Testing unpublish', () => {
         expect(response.updated).toBe(true);
 
         // Grab both collections
+        // eslint-disable-next-line require-atomic-updates
         userACollection = await CollectionModel.findById(userACollection?._id);
+        // eslint-disable-next-line require-atomic-updates
         userBCollection = await CollectionModel.findById(userBCollection?._id);
 
         // Check to make sure that userALevel1 is in userACollection but not in userBCollection
@@ -205,7 +207,9 @@ describe('Testing unpublish', () => {
         expect(response.updated).toBe(true);
 
         // Grab both collections
+        // eslint-disable-next-line require-atomic-updates
         userACollection = await CollectionModel.findById(userACollection?._id);
+        // eslint-disable-next-line require-atomic-updates
         userBCollection = await CollectionModel.findById(userBCollection?._id);
 
         // Check to make sure that userALevel1 is in userACollection but not in userBCollection

@@ -3,7 +3,7 @@ import NotificationType from '../constants/notificationType';
 import { NotificationModel } from '../models/mongoose';
 
 export async function createNewReviewOnYourLevelNotification(levelUserId: string | ObjectId, sourceUserId: string | ObjectId, targetLevelId: string | ObjectId, message: string | ObjectId) {
-  return await NotificationModel.updateOne({
+  return NotificationModel.updateOne({
     source: sourceUserId,
     sourceModel: 'User',
     target: targetLevelId,
@@ -35,7 +35,7 @@ export async function createNewRecordOnALevelYouBeatNotification(userIds: string
     };
   });
 
-  return await NotificationModel.create(createRecords);
+  return NotificationModel.create(createRecords);
 }
 
 export async function clearNotifications(userId?: string | ObjectId, sourceId?: string | ObjectId, targetId?: string | ObjectId, type?: NotificationType ) {
@@ -57,7 +57,7 @@ export async function clearNotifications(userId?: string | ObjectId, sourceId?: 
     obj['type'] = type;
   }
 
-  return await NotificationModel.deleteMany({
+  return NotificationModel.deleteMany({
     ...obj,
   });
 }

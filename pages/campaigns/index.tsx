@@ -34,7 +34,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const enrichedCollections = await Promise.all(collections.map(collection => enrichCollection(collection, reqUser)));
+  const enrichedCollections = await Promise.all(collections.map(async collection => enrichCollection(collection, reqUser)));
 
   return {
     props: {

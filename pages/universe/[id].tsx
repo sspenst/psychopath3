@@ -83,7 +83,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     throw new Error('Error finding Levels');
   }
 
-  const enrichedCollections = await Promise.all(collections.map(collection => enrichCollection(collection, reqUser)));
+  const enrichedCollections = await Promise.all(collections.map(async collection => enrichCollection(collection, reqUser)));
   const enrichedLevels = await enrichLevels(query.levels, reqUser);
 
   return {
@@ -127,7 +127,7 @@ export default function UniversePage({ enrichedCollections, enrichedLevels, sear
 
   useEffect(() => {
     setLoading(true);
-    routerPush('/' + url);
+    routerPush('/' + url).finally(() => {});
   }, [url, routerPush]);
 
   useEffect(() => {
@@ -187,7 +187,7 @@ export default function UniversePage({ enrichedCollections, enrichedLevels, sear
   }, [page, searchLevel, showLevelFilter, url]);
 
   useEffect(() => {
-    fetchLevels();
+    fetchLevels().finally(() => {});
   }, [fetchLevels]);
 
   useEffect(() => {

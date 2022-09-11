@@ -26,12 +26,12 @@ export default function LoginForm() {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(res => {
+    }).then(async res => {
       if (res.status === 200) {
         toast.dismiss();
         toast.success('Logged in');
         setShouldAttemptAuth(true);
-        router.push('/');
+        await router.push('/');
       } else {
         throw res.text();
       }

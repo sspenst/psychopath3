@@ -124,9 +124,9 @@ export default function ProfilePage({
 
   const changeTab = (buttonElement: React.MouseEvent<HTMLButtonElement>) => {
     if (urlMap[buttonElement.currentTarget.id]) {
-      router.push(`/profile/${user.name}/${urlMap[buttonElement.currentTarget.id]}`);
+      router.push(`/profile/${user.name}/${urlMap[buttonElement.currentTarget.id]}`).finally(() => {});
     } else if (buttonElement.currentTarget.id === 'profile-tab') {
-      router.push(`/profile/${user.name}`);
+      router.push(`/profile/${user.name}`).finally(() => {});
     }
 
     setTab(buttonElement.currentTarget.id);
@@ -134,7 +134,7 @@ export default function ProfilePage({
 
   const setPage = (page: number) => {
     setLoading(true);
-    router.push(`/profile/${user.name}/${urlMap[tab]}?page=${page}`);
+    router.push(`/profile/${user.name}/${urlMap[tab]}?page=${page}`).finally(() => {});
   };
 
   // create an array of objects with the id, trigger element (eg. button), and the content element

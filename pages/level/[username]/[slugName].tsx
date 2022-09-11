@@ -135,7 +135,7 @@ function LevelPage() {
       }
     }
 
-    router.push(nextUrl);
+    router.push(nextUrl).finally(() => {});
   };
 
   const [records, setRecords] = useState<Record[]>();
@@ -253,7 +253,7 @@ function LevelPage() {
                 enableLocalSessionRestore={true}
                 key={`game-${level._id.toString()}`}
                 level={level}
-                mutateLevel={mutateLevel}
+                mutateLevel={() => {mutateLevel().finally(() => {});}}
                 onComplete={collection ? onComplete : undefined}
                 onNext={collection ? onNext : undefined}
               />

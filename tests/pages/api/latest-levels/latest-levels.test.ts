@@ -76,6 +76,7 @@ describe('Testing latest levels api', () => {
   });
   test('Should always be limited to 10 levels and should only return drafts', async () => {
     for (let i = 0; i < 25; i++) {
+      // eslint-disable-next-line no-await-in-loop
       await LevelModel.create({
         _id: new ObjectId(),
         authorNote: 'level ' + i + ' author note',
@@ -118,6 +119,7 @@ describe('Testing latest levels api', () => {
         expect(res.status).toBe(200);
 
         for (let i = 0; i < response.length; i++) {
+          // eslint-disable-next-line no-await-in-loop
           const lvlDB = await LevelModel.findById(response[i]._id);
 
           expect(lvlDB.isDraft).toBe(false);

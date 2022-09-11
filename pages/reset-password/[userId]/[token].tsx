@@ -11,9 +11,9 @@ export default function ResetPassword() {
   const { token, userId } = router.query;
 
   useEffect(() => {
-    fetch('/api/check-token', { credentials: 'include' }).then(res => {
+    fetch('/api/check-token', { credentials: 'include' }).then(async res => {
       if (res.status === 200) {
-        router.replace('/');
+        await router.replace('/');
       } else {
         setLoading(false);
       }

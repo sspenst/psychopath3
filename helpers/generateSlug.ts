@@ -2,7 +2,7 @@ import Level from '../models/db/level';
 import { LevelModel } from '../models/mongoose';
 
 async function getLevelBySlug(slug: string): Promise<Level | null> {
-  return await LevelModel.findOne({ slug: slug });
+  return LevelModel.findOne({ slug: slug });
 }
 
 function slugify(str: string) {
@@ -21,6 +21,7 @@ export default async function generateSlug(userName: string, levelName: string, 
   let i = 2;
 
   while (i < 100) {
+    // eslint-disable-next-line no-await-in-loop
     const level = await getLevelBySlug(slug);
 
     if (!level) {

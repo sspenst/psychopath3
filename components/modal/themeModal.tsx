@@ -37,8 +37,8 @@ export default function ThemeModal({ closeModal, isOpen }: ThemeModalProps) {
       headers: {
         'Content-Type': 'application/json'
       },
-    }).then(() => {
-      mutateUserConfig();
+    }).then(async () => {
+      await mutateUserConfig();
     }).catch(err => {
       console.error(err);
     });

@@ -60,8 +60,11 @@ export default function FormattedLevelInfo({ level }: FormattedLevelInfoProps) {
       <button
         className='italic underline'
         onClick={() => {
-          navigator.clipboard.writeText(level.data);
-          toast.success('Copied to clipboard');
+          navigator.clipboard.writeText(level.data).then(() => {
+            toast.success('Copied to clipboard');
+          }).catch(() => {
+            toast.error('Failed to copy to clipboard');
+          });
         }}
       >
         Copy level data to clipboard

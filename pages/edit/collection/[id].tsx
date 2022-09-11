@@ -24,7 +24,7 @@ export default function CollectionEditPage() {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      router.replace('/');
+      router.replace('/').finally(() => {});
     }
   }, [isLoading, router, user]);
 

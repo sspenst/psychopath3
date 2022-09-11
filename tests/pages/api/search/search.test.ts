@@ -39,6 +39,7 @@ beforeAll(async () => {
       offset = 60 * 60 * 24 * 400; // 400 days ago
     }
 
+    // eslint-disable-next-line no-await-in-loop
     const lvl = await initLevel(usr,
       animalNames[(i * i + 171) % animalNames.length] + ' ' + animalNames[i % animalNames.length],
       {
@@ -48,6 +49,7 @@ beforeAll(async () => {
 
     // create a completion record for every third level
     if (i % 3 === 0) {
+      // eslint-disable-next-line no-await-in-loop
       await StatModel.create({
         _id: new ObjectId(),
         userId: TestId.USER,
@@ -58,6 +60,7 @@ beforeAll(async () => {
         ts: TimerUtil.getTs()
       });
     } else if (i % 5 === 0 ) {
+      // eslint-disable-next-line no-await-in-loop
       await StatModel.create({
         _id: new ObjectId(),
         userId: TestId.USER,

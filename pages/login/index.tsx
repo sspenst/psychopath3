@@ -13,10 +13,10 @@ export default function Login() {
   const { setShouldAttemptAuth } = useContext(AppContext);
 
   useEffect(() => {
-    fetch('/api/check-token', { credentials: 'include' }).then(res => {
+    fetch('/api/check-token', { credentials: 'include' }).then(async res => {
       if (res.status === 200) {
         setShouldAttemptAuth(true);
-        router.replace('/');
+        await router.replace('/');
       } else {
         setLoading(false);
       }

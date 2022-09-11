@@ -60,11 +60,11 @@ export async function getStatistics() {
 
 async function getCurrentlyOnlineCount() {
   // active in the last 15 minutes
-  return await UserModel.countDocuments({ last_visited_at: { $gt: TimerUtil.getTs() - 15 * 60 } });
+  return UserModel.countDocuments({ last_visited_at: { $gt: TimerUtil.getTs() - 15 * 60 } });
 }
 
 async function getRegisteredUsersCount() {
-  return await UserModel.countDocuments({ ts: { $exists: true } });
+  return UserModel.countDocuments({ ts: { $exists: true } });
 }
 
 async function getTotalAttempts() {

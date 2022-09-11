@@ -44,8 +44,8 @@ export default function Menu({
       headers: {
         'Content-Type': 'application/json'
       },
-    }).then(() => {
-      mutateUserConfig();
+    }).then(async () => {
+      await mutateUserConfig();
     }).catch(err => {
       console.error(err);
     });

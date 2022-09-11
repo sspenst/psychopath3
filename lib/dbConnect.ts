@@ -41,6 +41,8 @@ export default async function dbConnect() {
     /* istanbul ignore else */
     if (!process.env.MONGODB_URI || process.env.NODE_ENV === 'test') {
       // create with replica
+      // @TODO: Adding the disable because we haven't experienced any race conditions yet, but probably worth investigating at some point
+      // eslint-disable-next-line require-atomic-updates
       cached.mongoMemoryServer = await MongoMemoryReplSet.create({ replSet: { count: 1 } });
 
       uri = cached.mongoMemoryServer.getUri();
@@ -53,6 +55,8 @@ export default async function dbConnect() {
     });
   }
 
+  // @TODO: Adding the disable because we haven't experienced any race conditions yet, but probably worth investigating at some point
+  // eslint-disable-next-line require-atomic-updates
   cached.conn = await cached.promise;
 
   /* istanbul ignore next */

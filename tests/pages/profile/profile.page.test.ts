@@ -12,6 +12,7 @@ beforeAll(async () => {
   await dbConnect();
 
   for (let i = 0; i < 30; i++) {
+    // eslint-disable-next-line no-await-in-loop
     await createNewReviewOnYourLevelNotification(TestId.USER, TestId.USER_B, new ObjectId(), 'id ' + i);
   }
 });

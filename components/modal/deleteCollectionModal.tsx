@@ -21,10 +21,10 @@ export default function DeleteCollectionModal({ collection, closeModal, isOpen }
     fetch(`/api/collection/${collection._id}`, {
       method: 'DELETE',
       credentials: 'include',
-    }).then(res => {
+    }).then(async res => {
       if (res.status === 200) {
         closeModal();
-        mutateUser();
+        await mutateUser();
       } else {
         throw res.text();
       }

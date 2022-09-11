@@ -103,7 +103,7 @@ export default function Notifications({ notifications, searchQuery, totalRows }:
   }, [page, showFilter, url]);
 
   useEffect(() => {
-    fetchNotifications();
+    fetchNotifications().finally(() => {});
   }, [fetchNotifications]);
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function Notifications({ notifications, searchQuery, totalRows }:
 
   useEffect(() => {
     setLoading(true);
-    routerPush('/' + url);
+    routerPush('/' + url).finally(() => {});
   }, [url, routerPush]);
 
   useEffect(() => {
@@ -136,7 +136,7 @@ export default function Notifications({ notifications, searchQuery, totalRows }:
         <div className='pl-3'>
           <FilterButton selected={showFilter === 'unread'} value='unread' first last onClick={onUnreadFilterButtonClick} element={<span className='text-sm'>Unread</span>} />
         </div>
-        <NotificationList mutateNotifications={mutateUser} notifications={data} setNotifications={setData} />
+        <NotificationList mutateNotifications={() => {mutateUser().finally(() => {});}} notifications={data} setNotifications={setData} />
         <div className='flex justify-center flex-row'>
           { (page > 1) && (
             <button className={'ml-2 ' + (loading ? 'text-gray-300 cursor-default' : 'underline')} onClick={() => setPage(page - 1) }>Previous</button>

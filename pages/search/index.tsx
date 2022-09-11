@@ -127,7 +127,7 @@ export default function Search({ enrichedLevels, reqUser, searchQuery, totalRows
 
   useEffect(() => {
     setLoading(true);
-    routerPush('/' + url);
+    routerPush('/' + url).finally(() => {});
   }, [url, routerPush]);
 
   useEffect(() => {
@@ -184,7 +184,7 @@ export default function Search({ enrichedLevels, reqUser, searchQuery, totalRows
   }, [setSearchAuthorQueryVariable, searchAuthorText]);
 
   useEffect(() => {
-    fetchLevels();
+    fetchLevels().finally(() => {});
   }, [fetchLevels]);
 
   if (router.isFallback) {
@@ -261,7 +261,7 @@ export default function Search({ enrichedLevels, reqUser, searchQuery, totalRows
       setTimeRange(timeRangeKey);
     }
 
-    fetchLevels();
+    fetchLevels().finally(() => {});
   };
 
   const timeRangeButtons = [];
@@ -445,7 +445,7 @@ export default function Search({ enrichedLevels, reqUser, searchQuery, totalRows
           </div>
         }
         onChangePage={handlePageChange}
-        onSort={handleSort}
+        onSort={(column: TableColumn<EnrichedLevel>, sortDirection: string) => {handleSort(column, sortDirection).finally(() => {});}}
         pagination={true}
         paginationComponentOptions={{ noRowsPerPage: true }}
         paginationDefaultPage={page}

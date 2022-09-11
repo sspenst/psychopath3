@@ -78,6 +78,7 @@ describe('Testing latest reviews api', () => {
     for (let i = 0; i < 25; i++) {
       const levelId = new ObjectId();
 
+      // eslint-disable-next-line no-await-in-loop
       await LevelModel.create({
         _id: levelId,
         leastMoves: i + 1,
@@ -92,6 +93,7 @@ describe('Testing latest reviews api', () => {
         width: 5,
       });
 
+      // eslint-disable-next-line no-await-in-loop
       await ReviewModel.create({
         _id: new ObjectId(),
         levelId: levelId,

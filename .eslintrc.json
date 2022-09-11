@@ -3,6 +3,7 @@
     "browser": true,
     "es2021": true
   },
+  "ignorePatterns": [".eslintrc.js"],
   "extends": [
     "eslint:recommended",
     "next/core-web-vitals",
@@ -62,6 +63,10 @@
         "groups": [["^\\u0000", "^@?\\w", "^[^.]", "^\\."]]
       }
     ],
-    "space-infix-ops": "warn"
+    "space-infix-ops": "warn",
+    "@typescript-eslint/no-floating-promises": ["warn", {"ignoreVoid": true}],
+    "@typescript-eslint/no-empty-function": "off",
+    "require-atomic-updates": "warn"
+
   }
 }

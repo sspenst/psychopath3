@@ -12,7 +12,7 @@ export default function Settings() {
 
   useEffect(() => {
     if (error) {
-      router.replace('/login');
+      router.replace('/login').finally(() => {});
     }
   }, [error, router]);
 

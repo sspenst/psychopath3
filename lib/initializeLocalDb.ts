@@ -171,6 +171,7 @@ export async function initLevel(userId: string, name: string, obj: Partial<Level
     ...obj }) as Level;
 
   for (let i = 0; i < name.length; i++) {
+    // eslint-disable-next-line no-await-in-loop
     await ReviewModel.create({
       _id: new ObjectId(),
       levelId: id,

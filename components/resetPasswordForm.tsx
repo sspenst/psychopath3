@@ -36,11 +36,11 @@ export default function ResetPasswordForm({ token, userId }: ResetPasswordFormPr
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(res => {
+    }).then(async res => {
       if (res.status === 200) {
         toast.dismiss();
         toast.success('Password reset successfully');
-        router.replace('/login');
+        await router.replace('/login');
       } else {
         throw res.text();
       }

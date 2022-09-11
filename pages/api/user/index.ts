@@ -75,12 +75,15 @@ export default withAuth({ GET: {}, PUT: {}, DELETE: {} }, async (req: NextApiReq
         const levels = await LevelModel.find<Level>({
           userId: req.userId,
         }, '_id name', { lean: true });
+        const promises = [];
 
         for (const level of levels) {
-          const slug = await generateSlug(trimmedName, level.name, level._id.toString());
-
-          await LevelModel.updateOne({ _id: level._id }, { $set: { slug: slug } });
+          promises.push(generateSlug(trimmedName, level.name, level._id.toString()).then(async slug => {
+            await LevelModel.updateOne({ _id: level._id }, { $set: { slug: slug } });
+          }));
         }
+
+        await Promise.all(promises);
 
         try {
           const revalidateRes = await revalidateUrl(res, RevalidatePaths.CATALOG_ALL);

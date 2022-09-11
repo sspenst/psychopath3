@@ -31,5 +31,5 @@ export default async function sendPasswordResetEmail(req: NextApiRequest, user: 
     text: `Click here to reset your password: ${url}`,
   };
 
-  return await transporter.sendMail(mailOptions);
+  return transporter.sendMail(mailOptions);
 }

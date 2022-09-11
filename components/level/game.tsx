@@ -130,6 +130,7 @@ export default function Game({
               prevGameState.height === gameStateLocal.height &&
               prevGameState.width === gameStateLocal.width &&
               prevGameState.board.every((row, y) => {
+                // eslint-disable-next-line max-nested-callbacks
                 return row.every((square, x) => {
                   return square.levelDataType === gameStateLocal.board[y][x].levelDataType;
                 });
@@ -224,7 +225,7 @@ export default function Game({
       },
     }).then(async res => {
       if (res.status === 200) {
-        mutateUser();
+        await mutateUser();
 
         if (mutateLevel) {
           mutateLevel();
@@ -334,6 +335,7 @@ export default function Game({
       // treat prevGameState as immutable
       const blocks = prevGameState.blocks.map(block => block.clone());
       const board = prevGameState.board.map(row => {
+        // eslint-disable-next-line max-nested-callbacks
         return row.map(square => square.clone());
       });
       const moves = prevGameState.moves.map(move => move.clone());

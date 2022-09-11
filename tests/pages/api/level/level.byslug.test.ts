@@ -453,6 +453,7 @@ describe('Testing slugs for levels', () => {
       // expect no exceptions
       const promise = initLevel(TestId.USER, 'Sample');
 
+      // eslint-disable-next-line no-await-in-loop
       await expect(promise).resolves.toBeDefined();
     }
 

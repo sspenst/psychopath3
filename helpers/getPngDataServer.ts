@@ -14,5 +14,5 @@ export default async function getPngDataServer(level: Level) {
 
   await PImage.encodePNGToStream(canvas, stream);
 
-  return await stream.read();
+  return stream.read();
 }

@@ -10,7 +10,7 @@ export default function usePush(): NextRouter['push'] {
   routerRef.current = router;
 
   const [{ push }] = useState<Pick<NextRouter, 'push'>>({
-    push: path => routerRef.current.push(path, undefined, { scroll: false }),
+    push: async path => routerRef.current.push(path, undefined, { scroll: false }),
   });
 
   return push;

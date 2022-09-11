@@ -50,7 +50,7 @@ export default function SettingsForm() {
         toast.success(`Updated ${property}`);
       }
 
-      mutateUser();
+      await mutateUser();
     }).catch(err => {
       console.error(err);
       toast.dismiss();
@@ -115,10 +115,13 @@ export default function SettingsForm() {
     if (confirm('Are you sure you want to delete your account?')) {
       fetch('/api/user', {
         method: 'DELETE',
-      }).then(() => {
-        mutateUser(undefined);
-        router.push('/');
-      });
+      }).then(async() => {
+        await mutateUser(undefined);
+        await router.push('/');
+      }).catch(err => {
+        console.error(err);
+        toast.error('Error deleting account');
+      }).finally(() => {});
     }
   }
 

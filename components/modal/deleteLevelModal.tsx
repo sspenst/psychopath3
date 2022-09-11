@@ -22,10 +22,10 @@ export default function DeleteLevelModal({ closeModal, isOpen, level }: DeleteLe
     fetch(`/api/level/${level._id}`, {
       method: 'DELETE',
       credentials: 'include',
-    }).then(res => {
+    }).then(async res => {
       if (res.status === 200) {
         closeModal();
-        mutateUser();
+        await mutateUser();
       } else {
         throw res.text();
       }

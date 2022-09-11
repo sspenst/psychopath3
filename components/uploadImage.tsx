@@ -26,7 +26,7 @@ export default function UploadImage() {
         body: e.target?.result,
         credentials: 'include',
       }).then(async res => {
-        mutateUser();
+        await mutateUser();
         const { updated } = await res.json();
 
         if (!updated) {

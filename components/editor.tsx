@@ -294,7 +294,7 @@ export default function Editor({ isDirty, level, setIsDirty, setLevel }: EditorP
               new Control('btn-size', () => setIsSizeOpen(true), <>Size</>),
               new Control('btn-data', () => setIsDataOpen(true), <>Data</>),
               new Control('btn-save', () => save(), <>Save</>),
-              new Control('btn-test', () => router.push(`/test/${id}`), <>Test</>, isDirty),
+              new Control('btn-test', () => {router.push(`/test/${id}`).finally(() => {});}, <>Test</>, isDirty),
               new Control('btn-publish', () => setIsPublishLevelOpen(true), <>Publish</>, isDirty || level.leastMoves === 0),
             ]}
             level={level}
@@ -319,7 +319,7 @@ export default function Editor({ isDirty, level, setIsDirty, setLevel }: EditorP
           closeModal={() => setIsPublishLevelOpen(false)}
           isOpen={isPublishLevelOpen}
           level={level}
-          onPublish={() => router.push('/create')}
+          onPublish={ () => {router.push('/create').finally(() => {});}}
         />
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import Dimensions from '../../constants/dimensions';
 import { PageContext } from '../../contexts/pageContext';
 import useUser from '../../hooks/useUser';
@@ -38,8 +39,13 @@ export default function NotificationsButton() {
       }}
     >
       <button onClick={() => {
-        mutateUser();
-        setIsOpen(true);
+        mutateUser().then(() => {
+          setIsOpen(true);
+        }).catch((err) => {
+          toast.dismiss();
+          toast.error('Failed to fetch notifications');
+          console.error(err);
+        });
       }}>
         <div className='flex items-start'>
           <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' className='bi bi-bell h-6 w-5' viewBox='0 0 17 17'>
@@ -102,7 +108,7 @@ export default function NotificationsButton() {
               }}
             >
               <NotificationList
-                mutateNotifications={mutateUser}
+                mutateNotifications={() => {mutateUser().finally(() => {});}}
                 notifications={notifications}
                 setNotifications={setNotifications}
               />

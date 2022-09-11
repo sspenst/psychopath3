@@ -43,7 +43,9 @@ export default withAuth({ PUT: {} }, async (req: NextApiRequestWithAuth, res: Ne
   const imageBuffer = Buffer.from(image, 'binary');
   const magic = new Magic(MAGIC_MIME_TYPE);
 
-  return await new Promise(resolve => {
+  return new Promise(resolve => {
+    // @TODO Rewrite this function to not have lint issue
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     magic.detect(imageBuffer, async function(err, result) {
       if (err) {
         logger.error(err);

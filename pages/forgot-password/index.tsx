@@ -12,7 +12,7 @@ export default function ForgotPassword() {
   useEffect(() => {
     fetch('/api/check-token', { credentials: 'include' }).then(res => {
       if (res.status === 200) {
-        router.replace('/');
+        router.replace('/').finally(() => {});
       } else {
         setLoading(false);
       }

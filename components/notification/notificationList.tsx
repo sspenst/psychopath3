@@ -6,7 +6,7 @@ import FormattedNotification from './formattedNotification';
 import styles from './NotificationList.module.css';
 
 interface NotificationListProps {
-  mutateNotifications?: () => void;
+  mutateNotifications?: () => void | Promise<void>;
   notifications: Notification[];
   setNotifications: React.Dispatch<React.SetStateAction<Notification[]>>;
 }
@@ -27,7 +27,7 @@ export default function NotificationList({ mutateNotifications, notifications, s
         // upon successful update, mutate the source of the notifications so that
         // their read status stays up to date across pages
         if (mutateNotifications) {
-          mutateNotifications();
+          await mutateNotifications();
         }
       } else {
         throw res.text();
@@ -67,7 +67,7 @@ export default function NotificationList({ mutateNotifications, notifications, s
         <FormattedNotification
           key={'notification-' + notification._id}
           notification={notification}
-          onMarkAsRead={(read: boolean) => onMarkAsRead([notification], read)}
+          onMarkAsRead={ (read: boolean) => { onMarkAsRead([notification], read).finally(() => {});}}
         />
       );
     });
@@ -87,7 +87,8 @@ export default function NotificationList({ mutateNotifications, notifications, s
           )}
           onClick={() => {
             if (anyUnread) {
-              onMarkAsRead(notifications, true);
+              onMarkAsRead(notifications, true).finally(() => {})
+              ;
             }
           }}
           style={{

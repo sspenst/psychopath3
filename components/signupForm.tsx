@@ -65,7 +65,7 @@ export default function SignupForm() {
           // clear localstorage value
           window.localStorage.removeItem('tutorialCompletedAt');
           setShouldAttemptAuth(true);
-          router.push('/');
+          await router.push('/');
         }
       } else {
         throw res.text();

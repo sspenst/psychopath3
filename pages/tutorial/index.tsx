@@ -483,7 +483,7 @@ export default function App() {
       return;
     }
 
-    popperUpdateInterval.current = setInterval(async () => {
+    popperUpdateInterval.current = setInterval(() => {
       if (popperInstance) {
         popperInstance.forceUpdate();
       }
@@ -500,8 +500,8 @@ export default function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-    }).then(() => {
-      mutateUserConfig();
+    }).then(async () => {
+      await mutateUserConfig();
     }).catch(err => {
       console.error('Error setting tutorialCompletedAt', err);
     });
