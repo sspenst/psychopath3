@@ -140,21 +140,29 @@ const SkillTree = () => {
           {
             selector: 'node',
             style: {
-              'background-color': '#666',
+              'background-color': 'gray',
               'label': 'data(label)',
               'text-valign': 'center',
               'text-halign': 'center',
               // font color white
-              'color': '#fff',
+              'color': 'white',
               // font size
-              'font-size': '13px',
+              'font-size': '16px',
+              // auto size to fit label
+              'width': 'label',
+              // same as width
+              'height': 'width',
+              // make it a rectangle
+              'shape': 'round-rectangle',
+              // make it a little bigger
+              'padding': '10px',
+              // rounded corners
 
-            }
+            } as cytoscape.Css.Node,
           },
           {
             selector: 'edge',
             style: {
-              label: 'data(label)',
               'width': 3,
               'line-color': '#ccc',
               'target-arrow-color': '#ccc',
@@ -166,22 +174,22 @@ const SkillTree = () => {
         layout: {
           nodeDimensionsIncludeLabels: true,
           fit: true,
-
           name: 'dagre',
           ranker: 'tight-tree',
-          acyclicer: 'greedy',
+
         } as cytoscape.LayoutOptions,
 
       });
 
       cy.nodes().ungrabify();
       // After the layout is rendered, manually adjust the position of 'renovations' node
-      cy.on('layoutstop', function () {
-        const node = cy.getElementById('renovations');
-        const position = node.position();
+      cy.ready(function() {
+        const minY = Math.min(...cy.nodes().map(node => node.position('y')));
 
-        position.y -= 150; // adjust the Y position
-        node.position(position);
+        cy.pan({
+          x: 50,
+          y: -minY + 50,
+        });
       });
     }
   }, [container]);
