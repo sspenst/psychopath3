@@ -1,3 +1,4 @@
+import Collection from '@root/models/db/collection';
 import { createContext } from 'react';
 import { KeyedMutator } from 'swr';
 import ProStatsLevelType from '../constants/proStatsLevelType';
@@ -45,14 +46,18 @@ export interface ProStatsCommunityStepData {
 }
 
 interface LevelContextInterface {
+  chapter: number | undefined;
+  collection: Collection | undefined;
   getReviews: () => void;
   inCampaign: boolean; // true means you are playing an unbeaten level in the campaign
   level: EnrichedLevel;
   mutateLevel: () => void;
   mutateProStatsLevel: KeyedMutator<ProStatsLevel>;
+  proStatsLevel?: ProStatsLevel;
   records: Record[] | undefined;
   reviews: Review[] | undefined;
-  proStatsLevel?: ProStatsLevel;
+  setSidebarIndex: React.Dispatch<React.SetStateAction<number>>;
+  sidebarIndex: number;
 }
 
 export const LevelContext = createContext<LevelContextInterface | null>(null);
